@@ -7,3 +7,4 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', 'Home::index');
 $routes->get('/news', 'News::index');
+$routes->get('/news/(:any)', 'News::viewNews/$1');
