@@ -9,7 +9,7 @@ class News extends BaseController
 	{
 		$news = new NewsModel();
 
-		$data['newses'] = $news->where('status', 'draft')->findAll();
+		$data['newses'] = $news->where('status', 'published')->findAll();
 
 		echo view('news',$data);
 	}
@@ -19,7 +19,7 @@ class News extends BaseController
 		$news = new NewsModel();
 		$data['news'] = $news->where([
 			'slug' => $slug,
-			'status' => 'draft'
+			'status' => 'published'
 		])->first();
 
         // tampilkan 404 error jika data tidak ditemukan
