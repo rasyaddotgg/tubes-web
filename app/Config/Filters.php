@@ -25,6 +25,8 @@ class Filters extends BaseConfig
         'honeypot'      => Honeypot::class,
         'invalidchars'  => InvalidChars::class,
         'secureheaders' => SecureHeaders::class,
+        'usersAuth'     => \App\Filters\UsersAuthFilter::class,
+        'roleAccess'    => \App\Filters\RoleAccessFilter::class,
     ];
 
     /**
@@ -39,9 +41,21 @@ class Filters extends BaseConfig
             // 'honeypot',
             // 'csrf',
             // 'invalidchars',
+            // 'csrf',
+            'usersAuth' => [
+                'except' => [
+                    'home',
+                    'news',
+                    'news/*',
+                    'register',
+                    'register/*',
+                    'login/*',
+                    'logout/*'
+                ]
+            ],
         ],
         'after' => [
-            'toolbar',
+            // 'toolbar',
             // 'honeypot',
             // 'secureheaders',
         ],
@@ -67,5 +81,11 @@ class Filters extends BaseConfig
      * Example:
      * 'isLoggedIn' => ['before' => ['account/*', 'profiles/*']]
      */
-    public array $filters = [];
+    public array $filters = [
+        'roleAccess' => [
+            'before' => [
+                'table/*',     // Apply only to the `admin` controller
+            ],
+        ],
+    ];
 }
